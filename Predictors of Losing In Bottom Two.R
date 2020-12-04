@@ -93,49 +93,74 @@ Bottom_Two$Expressed_Hardship <- relevel(Bottom_Two$Expressed_Hardship, ref = "0
 
 ########################## UNIT BIVARIATE MODELS ###########################
 
+summary(Null <- glm(OUTCOME_LOSS ~ 1, family=binomial(link='logit'), data=Bottom_Two))
+
 summary(Age <- glm(OUTCOME_LOSS ~ Age, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Age, test="LRT")
 
 summary(Hometown_City <- glm(OUTCOME_LOSS ~ Hometown_City, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Hometown_City, test="LRT")
 
 summary(Hometown_State <- glm(OUTCOME_LOSS ~ Hometown_State, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Hometown_State, test="LRT")
 
 summary(Wig_Removed <- glm(OUTCOME_LOSS ~ Wig_Removed, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Wig_Removed, test="LRT")
 
 summary(Death_Drop <- glm(OUTCOME_LOSS ~ Death_Drop, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Death_Drop, test="LRT")
 
 summary(Outfit_Reveal <- glm(OUTCOME_LOSS ~ Outfit_Reveal, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Outfit_Reveal, test="LRT")
 
 summary(Quality_Of_Outfit <- glm(OUTCOME_LOSS ~ Quality_Of_Outfit, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Quality_Of_Outfit, test="LRT")
 
 summary(Merle <- glm(OUTCOME_LOSS ~ Merle, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Merle, test="LRT")
 
 summary(Michelle <- glm(OUTCOME_LOSS ~ Michelle, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Michelle, test="LRT")
 
 summary(Santino <- glm(OUTCOME_LOSS ~ Santino, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Santino, test="LRT")
 
 summary(Ross <- glm(OUTCOME_LOSS ~ Ross, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Ross, test="LRT")
 
 summary(Carson <- glm(OUTCOME_LOSS ~ Carson, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Carson, test="LRT")
 
 summary(Do_They_Know_Words <- glm(OUTCOME_LOSS ~ Do_They_Know_Words, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Do_They_Know_Words, test="LRT")
 
 summary(Outfit_Reveal_1 <- glm(OUTCOME_LOSS ~ Outfit_Reveal_1, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Outfit_Reveal_1, test="LRT")
 
 summary(Gender <- glm(OUTCOME_LOSS ~ Gender, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Gender, test="LRT")
 
 summary(Race <- glm(OUTCOME_LOSS ~ Race, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Race, test="LRT")
 
 summary(Body_Type <- glm(OUTCOME_LOSS ~ Body_Type, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Body_Type, test="LRT")
 
 summary(Type_Queen <- glm(OUTCOME_LOSS ~ Type_Queen, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Type_Queen, test="LRT")
 
 summary(Sewing <- glm(OUTCOME_LOSS ~ Sewing, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Sewing, test="LRT")
 
 summary(Dancing <- glm(OUTCOME_LOSS ~ Dancing, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Dancing, test="LRT")
 
 summary(Singing <- glm(OUTCOME_LOSS ~ Singing, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Singing, test="LRT")
 
 summary(Lip_Sync_Ass <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Lip_Sync_Ass, test="LRT")
 
 summary(Expressed_Hardship <- glm(OUTCOME_LOSS ~ Expressed_Hardship, family=binomial(link='logit'), data=Bottom_Two))
+anova(Null, Expressed_Hardship, test="LRT")
 

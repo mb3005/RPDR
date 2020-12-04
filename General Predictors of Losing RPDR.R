@@ -99,51 +99,75 @@ RPDR$Expressed_Hardship <- relevel(RPDR$Expressed_Hardship, ref = "0")
 
 ########################### UNIT BIVARIATE MODELS ###########################
 
+summary(Null <- glm(OUTCOME_LOSS ~ as.factor(Episode), family=binomial(link='logit'), data=RPDR))
 
 summary(Age <- glm(OUTCOME_LOSS ~ Age + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Age, test="LRT")
 
 summary(Hometown_City <- glm(OUTCOME_LOSS ~ Hometown_City + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Hometown_City, test="LRT")
 
 summary(Hometown_State <- glm(OUTCOME_LOSS ~ Hometown_State + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Hometown_State, test="LRT")
 
 summary(Wig_Removed <- glm(OUTCOME_LOSS ~ Wig_Removed + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Wig_Removed, test="LRT")
 
 summary(Death_Drop <- glm(OUTCOME_LOSS ~ Death_Drop + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Death_Drop, test="LRT")
 
 summary(Outfit_Reveal <- glm(OUTCOME_LOSS ~ Outfit_Reveal + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Outfit_Reveal, test="LRT")
 
 summary(Quality_Of_Outfit <- glm(OUTCOME_LOSS ~ Quality_of_outfit + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Quality_Of_Outfit, test="LRT")
 
 summary(Merle <- glm(OUTCOME_LOSS ~ Merle + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Merle, test="LRT")
 
 summary(Michelle <- glm(OUTCOME_LOSS ~ Michelle + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Michelle, test="LRT")
 
 summary(Santino <- glm(OUTCOME_LOSS ~ Santino + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Santino, test="LRT")
 
 summary(Ross <- glm(OUTCOME_LOSS ~ Ross + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Ross, test="LRT")
 
 summary(Carson <- glm(OUTCOME_LOSS ~ Carson + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Carson, test="LRT")
 
 summary(Do_They_Know_Words <- glm(OUTCOME_LOSS ~ Do_They_Know_Words + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Do_They_Know_Words, test="LRT")
 
 summary(Outfit_Reveal_1 <- glm(OUTCOME_LOSS ~ Outfit_Reveal_1 + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Outfit_Reveal_1, test="LRT")
 
 summary(Gender <- glm(OUTCOME_LOSS ~ Gender + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Gender, test="LRT")
 
 summary(Race <- glm(OUTCOME_LOSS ~ Race + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Race, test="LRT")
 
 summary(Body_Type <- glm(OUTCOME_LOSS ~ Body_Type + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Body_Type, test="LRT")
 
 summary(Type_Queen <- glm(OUTCOME_LOSS ~ Type_Queen + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Type_Queen, test="LRT")
 
 summary(Sewing <- glm(OUTCOME_LOSS ~ Sewing + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Sewing, test="LRT")
 
 summary(Dancing <- glm(OUTCOME_LOSS ~ Dancing + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Dancing, test="LRT")
 
 summary(Singing <- glm(OUTCOME_LOSS ~ Singing + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Singing, test="LRT")
 
 summary(Lip_Sync_Ass <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Lip_Sync_Ass, test="LRT")
 
 summary(Expressed_Hardship <- glm(OUTCOME_LOSS ~ Expressed_Hardship + as.factor(Episode), family=binomial(link='logit'), data=RPDR))
+anova(Null, Expressed_Hardship, test="LRT")
 
 
