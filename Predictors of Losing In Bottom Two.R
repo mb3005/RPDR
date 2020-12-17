@@ -1,7 +1,5 @@
 library(tidyverse)
 
-#to correct for parsing failures; R was reading as "logical" class for columns: bottom3, bottom4, bottom5, bottom 6
-
 Bottom_Two <- read_csv(file.path("Data Files", "Bottom_Two.csv"))
 
 Bottom_Two <- Bottom_Two %>%
@@ -53,11 +51,32 @@ Bottom_Two$Type_Queen <- Bottom_Two$Type_Queen %>%
 levels(Bottom_Two$Type_Queen)
 Bottom_Two$Type_Queen
 
+#collapsing factor levels
+Bottom_Two$Hometown_City <- Bottom_Two$Hometown_City %>%
+  fct_collapse('New York' = c('New York', 'Brooklyn', 'The Bronx'),
+               'Other' = c('Albuquerque', 'Atlanta', 'Austin', 'Azusa',
+                           'Back Swamp', 'Bayamon', 'Bedford', 'Boston', 'Carolina',
+                           'Cayey', 'Cherry Hill', 'Chicago', 'Cincinnati',
+                           'Cleveland', 'Columbus', 'Dallas', 'Dayton', 'Denver',
+                           'Dorado', 'Echo Park', 'Elmwood Park', 'Falls Church',
+                           'Fort Lauderdale', 'Gainesville', 'Gloucester', 'Greenville',
+                           'Guaynabo', 'Harlem', 'Hudson', 'Indianapolis', 'Iowa City',
+                           'Johnson City', 'Kansas City', 'Las Vegas', 'Long Beach',
+                           'Los Angeles', 'Manati', 'Mesquite', 'Milwaukee', 'Minneapolis',
+                           'Mira Loma', 'Nashville', 'New Orleans', 'Norwalk', 'Orlando',
+                           'Owensboro', 'Pittsburgh', 'Queens', 'Raleigh', 'Redlands', 'Riverdale',
+                           'Riverside', 'Rochester', 'San Diego', 'San Francisco', 'San Juan',
+                           'Savannah', 'Seattle', 'Shreveport', 'South Beach', 'Southlake', 'St. Petersburg',
+                           'Tallahassee', 'Tampa', 'Tucson', 'Van Nuys', 'West Hollywood',
+                           'Worcester'))
+
+levels(Bottom_Two$Hometown_City)
+
 #setting consistent reference levels
 
 Bottom_Two$OUTCOME_LOSS <- relevel(Bottom_Two$OUTCOME_LOSS, ref = "0")
 
-Bottom_Two$Hometown_State <- relevel(Bottom_Two$Hometown_State, ref = "New York")
+#Bottom_Two$Hometown_State <- relevel(Bottom_Two$Hometown_State, ref = "New York")
 
 Bottom_Two$Hometown_City <- relevel(Bottom_Two$Hometown_City, ref = "New York")
 
@@ -101,8 +120,9 @@ anova(Null, Age, test="LRT")
 summary(Hometown_City <- glm(OUTCOME_LOSS ~ Hometown_City, family=binomial(link='logit'), data=Bottom_Two))
 anova(Null, Hometown_City, test="LRT")
 
-summary(Hometown_State <- glm(OUTCOME_LOSS ~ Hometown_State, family=binomial(link='logit'), data=Bottom_Two))
-anova(Null, Hometown_State, test="LRT")
+#Hometown_State causes colinearity - will no longer be including in the model
+#summary(Hometown_State <- glm(OUTCOME_LOSS ~ Hometown_State, family=binomial(link='logit'), data=Bottom_Two))
+#anova(Null, Hometown_State, test="LRT")
 
 summary(Wig_Removed <- glm(OUTCOME_LOSS ~ Wig_Removed, family=binomial(link='logit'), data=Bottom_Two))
 anova(Null, Wig_Removed, test="LRT")
@@ -163,4 +183,11 @@ anova(Null, Lip_Sync_Ass, test="LRT")
 
 summary(Expressed_Hardship <- glm(OUTCOME_LOSS ~ Expressed_Hardship, family=binomial(link='logit'), data=Bottom_Two))
 anova(Null, Expressed_Hardship, test="LRT")
+
+################         full model       #################
+
+summary(glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Ross + Carson + Do_They_Know_Words + Outfit_Reveal_1
+    + Gender + Race + Body_Type + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+    family = binomial(link='logit'), data = Bottom_Two))
+
 
