@@ -184,10 +184,35 @@ anova(Null, Lip_Sync_Ass, test="LRT")
 summary(Expressed_Hardship <- glm(OUTCOME_LOSS ~ Expressed_Hardship, family=binomial(link='logit'), data=Bottom_Two))
 anova(Null, Expressed_Hardship, test="LRT")
 
-################         full model       #################
+################         Multivariate Model Comparisons        #################
 
-summary(glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Ross + Carson + Do_They_Know_Words + Outfit_Reveal_1
-    + Gender + Race + Body_Type + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+summary(Full_Model <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Ross + Carson + Do_They_Know_Words +
+    Gender + Race + Body_Type + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
     family = binomial(link='logit'), data = Bottom_Two))
 
+summary(Model_1 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Ross + Carson + Do_They_Know_Words +
+    Gender + Body_Type + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+    family = binomial(link='logit'), data = Bottom_Two))
 
+anova(Model_1, Full_Model, test="LRT")   #not significant, Race excluded from Model 1
+
+summary(Model_2 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Ross + Carson + Do_They_Know_Words +
+    Gender + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+    family = binomial(link='logit'), data = Bottom_Two))
+
+anova(Model_2, Model_1, test="LRT")   #not significant, Body_Type excluded from Model 2
+
+summary(Model_3 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Carson + Do_They_Know_Words +
+    Gender + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+    family = binomial(link='logit'), data = Bottom_Two))
+
+anova(Model_3, Model_2, test="LRT")   #not significant, Ross excluded from Model 3
+
+summary(Model_4 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Do_They_Know_Words +
+    Gender + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+    family = binomial(link='logit'), data = Bottom_Two))
+
+anova(Model_4, Model_3, test="LRT")   #not significant, Carson excluded from Model 4
+
+Delta_Coef_1 <- abs(coef(Model_1)-coef(Full_Model))[-8:-12]/(coef(Full_Model)[-8:-12])
+round(Delta_Coef_1,3)
