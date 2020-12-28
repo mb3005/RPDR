@@ -194,37 +194,38 @@ summary(Model_1 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Ross +
     Gender + Body_Type + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
     family = binomial(link='logit'), data = Bottom_Two))
 
-anova(Model_1, Full_Model, test="LRT")   #not significant, Race excluded from Model 1
+anova(Model_1, Full_Model, test="LRT")   #Race excluded from Model 1
 
 summary(Model_2 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Ross + Carson + Do_They_Know_Words +
     Gender + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
     family = binomial(link='logit'), data = Bottom_Two))
 
-anova(Model_2, Model_1, test="LRT")   #not significant, Body_Type excluded from Model 2
+anova(Model_2, Model_1, test="LRT")   #Body_Type excluded from Model 2
 
 summary(Model_3 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Carson + Do_They_Know_Words +
     Gender + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
     family = binomial(link='logit'), data = Bottom_Two))
 
-anova(Model_3, Model_2, test="LRT")   #not significant, Ross excluded from Model 3
+anova(Model_3, Model_2, test="LRT")   #Ross excluded from Model 3
 
 summary(Model_4 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Do_They_Know_Words +
     Gender + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
     family = binomial(link='logit'), data = Bottom_Two))
 
-anova(Model_4, Model_3, test="LRT")   #not significant, Carson excluded from Model 4
+anova(Model_4, Model_3, test="LRT")   #Carson excluded from Model 4
 
 summary(Model_5 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Do_They_Know_Words +
     Gender + Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,
     family = binomial(link='logit'), data = Bottom_Two))
 
-anova(Model_5, Model_4, test="LRT")   #not significant, Dancing excluded from Model 5
+anova(Model_5, Model_4, test="LRT")   #Dancing excluded from Model 5
 
 summary(Model_6 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Do_They_Know_Words +
     Gender + Sewing + Lip_Sync_Ass + Expressed_Hardship,
     family = binomial(link='logit'), data = Bottom_Two))
 
-anova(Model_6, Model_5, test="LRT")   #not significant, Singing excluded from Model 6
+anova(Model_6, Model_5, test="LRT")   #Singing excluded from Model 6
 
 Delta_Coef_1 <- abs((coef(Model_6)-coef(Full_Model))/coef(Full_Model))
 round(Delta_Coef_1,3)
+
