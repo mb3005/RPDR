@@ -229,3 +229,15 @@ anova(Model_6, Model_5, test="LRT")   #Singing excluded from Model 6
 Delta_Coef_1 <- abs((coef(Model_6)-coef(Full_Model))/coef(Full_Model))
 round(Delta_Coef_1,3)
 
+############       Re-evaluation Of Initial  Predictors    #############
+
+# Variables excluded in second evaluation in order: Age, Hometown_City, Wig_Removed, Death_Drop, Merle, Michelle,
+#                                                   Santino, Type_Queen, Race, Body_Type, Ross, Carson, Dancing, Singing
+
+summary(Model_7 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Do_They_Know_Words +
+    Gender + Sewing + Lip_Sync_Ass + Expressed_Hardship,
+    family = binomial(link='logit'), data = Bottom_Two))
+
+anova(Model_7, Model_6, test="LRT")
+
+
