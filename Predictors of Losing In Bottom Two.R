@@ -80,6 +80,8 @@ Bottom_Two$OUTCOME_LOSS <- relevel(Bottom_Two$OUTCOME_LOSS, ref = "0")
 
 Bottom_Two$Hometown_City <- relevel(Bottom_Two$Hometown_City, ref = "New York")
 
+Bottom_Two$Gender <- relevel(Bottom_Two$Gender, ref = "Cis")
+
 Bottom_Two$Quality_of_outfit <- relevel(Bottom_Two$Quality_Of_Outfit, ref = "Boot")
 
 Bottom_Two$Wig_Removed <- relevel(Bottom_Two$Wig_Removed, ref = "0")
@@ -242,8 +244,8 @@ summary(Model_6 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Do_The
 ############     EXAMINING INTERACTIONS AMONG COVARIATES     ############
 
 summary(Model_7 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Do_They_Know_Words +
-                       Gender + Sewing + Lip_Sync_Ass + Expressed_Hardship + Sewing:Expressed_Hardship,
-                       family = binomial(link='logit'), data = Bottom_Two))
+    Gender + Sewing + Lip_Sync_Ass + Expressed_Hardship + Outfit_Reveal:Do_They_Know_Words,
+    family = binomial(link='logit'), data = Bottom_Two))
 
 anova(Model_6, Model_7, test="LRT")
 
