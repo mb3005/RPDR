@@ -226,11 +226,25 @@ summary(Model_6 <- glm(OUTCOME_LOSS ~ Carson + Do_They_Know_Words +
 
 anova(Model_6, Model_5, test="LRT")   #Outfit_Reveal excluded from Model 6
 
-summary(Model_7 <- glm(OUTCOME_LOSS ~ Dancing + Gender + Ross + Carson + Do_They_Know_Words +
-    Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,
-    family = binomial(link='logit'), data = Bottom_Two))
+#  Beta Comparisons differ > 20% for Singing
 
-anova(Model_7, Model_6, test="LRT")
+summary(Model_7 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Carson + Do_They_Know_Words +
+    Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,family = binomial(link='logit'), data = Bottom_Two))
+
+summary(Model_8 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Dancing + Carson + Do_They_Know_Words +
+    Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,family = binomial(link='logit'), data = Bottom_Two))
+
+summary(Model_9 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Dancing + Ross + Carson + Do_They_Know_Words +
+    Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,family = binomial(link='logit'), data = Bottom_Two))
+
+summary(Model_10 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Dancing + Ross + Gender + Carson + Do_They_Know_Words +
+    Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,family = binomial(link='logit'), data = Bottom_Two))
+
+summary(Model_11 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Dancing + Ross + Gender + Body_Type + Carson + Do_They_Know_Words +
+    Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,family = binomial(link='logit'), data = Bottom_Two))
+
+summary(Model_12 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Dancing + Ross + Gender + Body_Type + Race + Carson + Do_They_Know_Words +
+    Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,family = binomial(link='logit'), data = Bottom_Two))
 
 Delta_Coef_1 <- abs((coef(Model_6)-coef(Full_Model))/coef(Full_Model))
 round(Delta_Coef_1,3)
