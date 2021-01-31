@@ -11,7 +11,6 @@ Bottom_Two_2 <- Bottom_Two_2 %>%
                  'Num_Btm', 'Num_Low', 'Num_Lowbtm', 'Db_Score', 'Points', 'PPE'),
             as.character)
 
-
 Bottom_Two_2 <- Bottom_Two_2 %>%
   mutate_at(vars('Age','Numqueens', 'Numcontests', 'Perc_High', 'Perc_Win', 'Perc_Winhigh', 'Perc_Low',
                  'Perc_Btm', 'Perc_Lowbtm', 'Num_High', 'Num_Win', 'Num_Winhigh',
@@ -80,6 +79,10 @@ Bottom_Two_2$OUTCOME_LOSS <- relevel(Bottom_Two_2$OUTCOME_LOSS, ref = "0")
 
 Bottom_Two_2$Hometown_City <- relevel(Bottom_Two_2$Hometown_City, ref = "New York")
 
+Bottom_Two_2$Gender <- relevel(Bottom_Two_2$Gender, ref = "Cis")
+
+Bottom_Two_2$Body_Type <- relevel(Bottom_Two_2$Body_Type, ref = "Not Big")
+
 Bottom_Two_2$Quality_of_outfit <- relevel(Bottom_Two_2$Quality_Of_Outfit, ref = "Boot")
 
 Bottom_Two_2$Wig_Removed <- relevel(Bottom_Two_2$Wig_Removed, ref = "0")
@@ -109,6 +112,7 @@ Bottom_Two_2$Singing <- relevel(Bottom_Two_2$Singing, ref = "0")
 Bottom_Two_2$Lip_Sync_Ass <- relevel(Bottom_Two_2$Lip_Sync_Ass, ref = "0")
 
 Bottom_Two_2$Expressed_Hardship <- relevel(Bottom_Two_2$Expressed_Hardship, ref = "0")
+
 
 ########################## UNIT BIVARIATE MODELS ###########################
 
@@ -255,8 +259,66 @@ round(Delta_Coef_1,3)
 #                                                   Santino, Type_Queen, Race, Body_Type, Ross, Carson, Dancing, Singing
 
 # Beta comparisons showed there was no point in which coefficients did not change by  more than 20%.
-# As a result, we will be collapsing the multilevel models.
+# As a result, we will be collapsing the multilevel variable Body Type as there was a zero cell
 
 table(Bottom_Two_2$Body_Type, Bottom_Two_2$Gender)
 table(Bottom_Two_2$Race, Bottom_Two_2$Gender)
+
+Bottom_Two_2$Body_Type <- Bottom_Two_2$Body_Type %>%
+  fct_collapse('Not Big' = c('Not Big'),
+               'Bodacious' = c('Thick n Juicy', 'Chunky Yet Funky'))
+
+Bottom_Two_2$Body_Type <- Bottom_Two_2$Body_Type %>%
+  fct_recode('Not Big'='0', 'Bodacious'='1')
+levels(Bottom_Two_2$Body_Type)
+
+Bottom_Two_2$Body_Type <- relevel(Bottom_Two_2$Body_Type, ref = "0")
+
+Bottom_Two_2$Body_Type
+
+###########      Multivariate Model Comparisons with Collapsed Body Type       #############
+
+summary(Full_Model_2 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Ross + Carson + Do_They_Know_Words +
+          Gender + Race + Body_Type + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+          family = binomial(link='logit'), data = Bottom_Two_2))
+
+summary(Model_13 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Ross + Carson + Do_They_Know_Words +
+          Gender + Body_Type + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+          family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_13, Full_Model_2, test="LRT")   # Race excluded from Model 13
+
+summary(Model_14 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Ross + Carson + Do_They_Know_Words +
+          Gender + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+          family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_14, Model_13, test="LRT")      # Body Type excluded from Model 14
+
+summary(Model_15 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Ross + Carson + Do_They_Know_Words +
+          Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+          family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_15, Model_14, test="LRT")      # Gender excluded from Model 15
+
+summary(Model_16 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Carson + Do_They_Know_Words +
+          Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+          family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_16, Model_15, test="LRT")     # Ross excluded from Model 16
+
+summary(Model_17 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Carson + Do_They_Know_Words +
+          Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+          family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_17, Model_16, test="LRT")    # Dancing excluded from Model 17
+
+summary(Model_18 <- glm(OUTCOME_LOSS ~ Carson + Do_They_Know_Words +
+          Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+          family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_18, Model_17, test="LRT")    # Outfit Reveal excluded from Model 18
+
+# all p values equal or < 0.25 in Model_18
+
+#  Beta Comparisons differ > 20% for Singing
 
