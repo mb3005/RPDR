@@ -241,7 +241,7 @@ summary(Model_6 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Do_The
     Gender + Sewing + Lip_Sync_Ass + Expressed_Hardship,
     family = binomial(link='logit'), data = Bottom_Two))
 
-############     EXAMINING INTERACTIONS AMONG COVARIATES     ############
+############     Examining Interactions Among Covariates     ############
 
 summary(Model_7 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Quality_Of_Outfit + Do_They_Know_Words +
     Gender + Sewing + Lip_Sync_Ass + Expressed_Hardship + Outfit_Reveal:Do_They_Know_Words,

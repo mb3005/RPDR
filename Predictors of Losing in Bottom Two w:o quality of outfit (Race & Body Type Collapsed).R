@@ -260,14 +260,90 @@ anova(Model_6, Model_5, test="LRT")   #Outfit_Reveal excluded from Model 6
 # Beta Comparisons showed Beta estimate for singing changed >20%
 
 summary(Model_7 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Carson + Do_They_Know_Words +
-                         Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,family = binomial(link='logit'), data = Bottom_Two_2))
+                         Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
-summary(Model_8 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Dancing + Carson + Do_They_Know_Words +
-                         Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,family = binomial(link='logit'), data = Bottom_Two_2))
+summary(Model_8 <- glm(OUTCOME_LOSS ~ Dancing + Outfit_Reveal + Carson + Do_They_Know_Words +
+                         Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
-summary(Model_9 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Dancing + Ross + Carson + Do_They_Know_Words +
-                         Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship,family = binomial(link='logit'), data = Bottom_Two_2))
+summary(Model_9 <- glm(OUTCOME_LOSS ~ Ross + Dancing + Outfit_Reveal + Carson + Do_They_Know_Words +
+                         Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
-# Adding back in Outfit Reveal, Dancing and Ross yielded beta comparisons changing <20%
+# Adding back in Outfit Reveal, Dancing and then Ross yielded beta comparisons changing <20%
+# Ross retained in the model
 
+
+###########      Backward Elimination Round 2     ###########
+
+summary(Model_10 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Ross + Carson + Do_They_Know_Words +
+                         Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_10, Model_9, test="LRT")      # Dancing excluded from Model 10
+
+summary(Model_11 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Ross + Carson + Do_They_Know_Words +
+                          Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_11, Model_10, test="LRT")      # Outfit Reveal met significance criteria; retained in the model
+
+summary(Model_12 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_12, Model_11, test="LRT")      # Carson excluded from Model 12
+
+summary(Model_13 <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_13, Model_12, test="LRT")     # Singing excluded from Model 13
+
+# All variables meet pr(>|z|) < 0.25 threshold
+# Beta comparisons showed the beta estimate for Ross changing > 20%; confounding variable
+
+summary(Model_14 <- glm(OUTCOME_LOSS ~ Singing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+summary(Model_15 <- glm(OUTCOME_LOSS ~ Carson + Singing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+summary(Model_16 <- glm(OUTCOME_LOSS ~ Dancing + Carson + Singing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+# Adding in Singing,Carson and then Dancing yielded beta estimate comparisons changing < 20%
+# Dancing retained in the model
+
+summary(Model_16 <- glm(OUTCOME_LOSS ~ Dancing + Carson + Singing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+###########      Backward Elimination Round 3     ###########
+
+
+summary(Model_17 <- glm(OUTCOME_LOSS ~ Dancing + Carson + Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_17, Model_16, test="LRT")    # Singing excluded from Model 17
+
+
+summary(Model_18 <- glm(OUTCOME_LOSS ~ Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_18, Model_17, test="LRT")     # Carson excluded from Model 18
+
+# all variables meet pr(>|z|) < 0.25 threshold or were retained
+# Beta comparisons showed the beta estimate for Ross changing > 20%; confounding variable
+
+summary(Model_19 <- glm(OUTCOME_LOSS ~ Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+# Adding Carson back in the model yielded beta estimate comparisons changing < 20%
+# Carson retained in Model 19
+# preliminary main effects model
+
+############       Re-evaluation Of Initial Predictors       #############
+
+# Variables excluded in second evaluation in order: Age, Hometown_City, Wig_Removed, Death_Drop, Merle, Michelle,
+#                                                   Santino, Gender, Race, Body_Type, Type_Queen, Singing,
+#
+
+summary(Model_20 <- glm(OUTCOME_LOSS ~ Age + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+anova(Model_20, Model_19, test="LRT")     # Age retained
 
