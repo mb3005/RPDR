@@ -334,7 +334,6 @@ summary(Model_19 <- glm(OUTCOME_LOSS ~ Carson + Dancing + Outfit_Reveal + Ross +
 
 # Adding Carson back in the model yielded beta estimate comparisons changing < 20%
 # Carson retained in Model 19
-# preliminary main effects model
 
 ############       Re-evaluation Of Initial Predictors       #############
 
@@ -342,8 +341,19 @@ summary(Model_19 <- glm(OUTCOME_LOSS ~ Carson + Dancing + Outfit_Reveal + Ross +
 #                                                   Santino, Gender, Race, Body_Type, Type_Queen, Singing,
 #
 
+
+# preliminary main effects model
 summary(Model_20 <- glm(OUTCOME_LOSS ~ Age + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
                           Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
 anova(Model_20, Model_19, test="LRT")     # Age retained
+
+############     Examining Interactions Among Covariates     ############
+
+
+summary(Model_20 <- glm(OUTCOME_LOSS ~ Age:Dancing + Age + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+
+
 
