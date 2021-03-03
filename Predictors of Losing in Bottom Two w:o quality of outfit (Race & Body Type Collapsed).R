@@ -351,9 +351,17 @@ anova(Model_20, Model_19, test="LRT")     # Age retained
 ############     Examining Interactions Among Covariates     ############
 
 
-summary(Model_20 <- glm(OUTCOME_LOSS ~ Age:Dancing + Age + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
                           Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
 
+Age_Ordered <- Bottom_Two_2 %>%      # age arranged from smallest to largest
+    arrange(Age)
 
+Age_Bin <- as.factor(ntile(Age_Ordered$Age, 4))     # grouped into 4 bins in order
+
+table(Age_Bin)  # equal number of observations in each bin
+
+summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age_Bin + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
