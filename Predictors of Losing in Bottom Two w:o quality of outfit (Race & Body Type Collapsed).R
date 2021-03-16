@@ -348,7 +348,7 @@ summary(Model_20 <- glm(OUTCOME_LOSS ~ Age + Carson + Dancing + Outfit_Reveal + 
 
 anova(Model_20, Model_19, test="LRT")     # Age retained
 
-############     Examining Interactions Among Covariates     ############
+############     Testing Linearity of Continuous Variables     ############
 
 
 summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
@@ -358,10 +358,10 @@ summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age + C
 Age_Ordered <- Bottom_Two_2 %>%      # age arranged from smallest to largest
     arrange(Age)
 
-Age_Bin <- as.factor(ntile(Age_Ordered$Age, 4))     # grouped into 4 bins in order
+Age_Range <- as.factor(cut_number(Age_Ordered$Age, n=4))
 
-table(Age_Bin)  # equal number of observations in each bin
+table(Age_Range)  # equal number of observations in each bin
 
-summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age_Bin + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age_Range + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
                           Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
