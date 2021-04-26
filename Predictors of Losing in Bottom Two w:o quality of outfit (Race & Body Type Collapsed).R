@@ -358,9 +358,28 @@ summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age + C
 Age_Ordered <- Bottom_Two_2 %>%      # age arranged from smallest to largest
     arrange(Age)
 
-Age_Range <- as.factor(cut_number(Age_Ordered$Age, n=4))
+Age_Range <- as.factor(cut(Age_Ordered$Age, breaks=c(20,25,30,35,40,41,45,Inf)))
 
-table(Age_Range)  # equal number of observations in each bin
+table(Age_Range)
+
+Age_Range <- relevel(Age_Range, ref = "(45,Inf]")
+levels(Age_Range)
+
+summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age_Range + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+
+##########      collapsing 41+ age groups      ###########
+
+Age_Ordered <- Bottom_Two_2 %>%      # age arranged from smallest to largest
+  arrange(Age)
+
+Age_Range <- as.factor(cut(Age_Ordered$Age, breaks=c(20,25,30,35,40,Inf)))
+
+table(Age_Range)
+
+Age_Range <- relevel(Age_Range, ref = "(40,Inf]")
+levels(Age_Range)
 
 summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age_Range + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
                           Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
