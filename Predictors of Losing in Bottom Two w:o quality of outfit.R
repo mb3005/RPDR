@@ -381,6 +381,6 @@ table(Age_Range)
 Age_Range <- relevel(Age_Range, ref = "(40,Inf]")
 levels(Age_Range)
 
-summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age_Range + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
-                          Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+summary(final_model) <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age_Range + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                       Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2)
 
