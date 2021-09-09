@@ -5,6 +5,8 @@ Bottom_Two_2 <- read_csv(file.path("Data Files", "Bottom_Two.csv"))
 Bottom_Two_2 <- Bottom_Two_2 %>%
   mutate_all(as.factor)
 
+
+
 Bottom_Two_2 <- Bottom_Two_2 %>%
   mutate_at(vars('Age','Numqueens', 'Numcontests', 'Perc_High', 'Perc_Win', 'Perc_Winhigh', 'Perc_Low',
                  'Perc_Btm', 'Perc_Lowbtm', 'Num_High', 'Num_Win', 'Num_Winhigh',
@@ -16,6 +18,8 @@ Bottom_Two_2 <- Bottom_Two_2 %>%
                  'Perc_Btm', 'Perc_Lowbtm', 'Num_High', 'Num_Win', 'Num_Winhigh',
                  'Num_Btm', 'Num_Low', 'Num_Lowbtm', 'Db_Score', 'Points', 'PPE'),
             as.numeric)
+
+
 
 str(Bottom_Two_2)
 
@@ -131,17 +135,17 @@ Bottom_Two_2$Body_Type
 
 Bottom_Two_2$Race <- Bottom_Two_2$Race %>%
   fct_collapse('White' = c('White'),
-               'Non White' = c('Latin','Asian','Black','Other'))
+               'Non-White' = c('Latin','Asian','Black','Other'))
 
 Bottom_Two_2$Body_Type <- Bottom_Two_2$Body_Type %>%
-  fct_recode('Non White'='0', 'White'='1')
+  fct_recode('Non-White'='0', 'White'='1')
 levels(Bottom_Two_2$Race)
 
 Bottom_Two_2$Race <- relevel(Bottom_Two_2$Race, ref = "0")
 
 Bottom_Two_2$Race
 
-########################## UNIT BIVARIATE MODELS ###########################
+########################## Step 1:UNIT BIVARIATE MODELS ###########################
 
 summary(Null <- glm(OUTCOME_LOSS ~ 1, family=binomial(link='logit'), data=Bottom_Two_2))
 
@@ -215,7 +219,7 @@ anova(Null, Lip_Sync_Ass, test="LRT")
 summary(Expressed_Hardship <- glm(OUTCOME_LOSS ~ Expressed_Hardship, family=binomial(link='logit'), data=Bottom_Two_2))
 anova(Null, Expressed_Hardship, test="LRT")
 
-################         Multivariate Model Comparisons        #################
+######     Step 2:   Multivariate Model Comparisons : Backward Elimination Round 1      #######
 
 summary(Full_Model <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Ross + Carson + Do_They_Know_Words +
                             Gender + Race + Body_Type + Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
@@ -268,7 +272,7 @@ summary(Model_8 <- glm(OUTCOME_LOSS ~ Dancing + Outfit_Reveal + Carson + Do_They
 summary(Model_9 <- glm(OUTCOME_LOSS ~ Ross + Dancing + Outfit_Reveal + Carson + Do_They_Know_Words +
                          Sewing + Singing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
-# Adding back in Outfit Reveal, Dancing and then Ross yielded beta comparisons changing <20%
+# Forward Selection: adding back in Outfit Reveal, Dancing and then Ross yielded beta comparisons changing <20%
 # Ross retained in the model
 
 
@@ -306,7 +310,7 @@ summary(Model_15 <- glm(OUTCOME_LOSS ~ Carson + Singing + Outfit_Reveal + Ross +
 summary(Model_16 <- glm(OUTCOME_LOSS ~ Dancing + Carson + Singing + Outfit_Reveal + Ross + Do_They_Know_Words +
                           Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
-# Adding in Singing,Carson and then Dancing yielded beta estimate comparisons changing < 20%
+# Forward Selection Round 2: adding back in Singing,Carson and then Dancing yielded beta estimate comparisons changing < 20%
 # Dancing retained in the model
 
 summary(Model_16 <- glm(OUTCOME_LOSS ~ Dancing + Carson + Singing + Outfit_Reveal + Ross + Do_They_Know_Words +
@@ -332,10 +336,10 @@ anova(Model_18, Model_17, test="LRT")     # Carson excluded from Model 18
 summary(Model_19 <- glm(OUTCOME_LOSS ~ Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
                           Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
-# Adding Carson back in the model yielded beta estimate comparisons changing < 20%
+# Forward selection round 3: adding Carson back in the model yielded beta estimate comparisons changing < 20%
 # Carson retained in Model 19
 
-############       Re-evaluation Of Initial Predictors       #############
+############   Step 3:    Re-evaluation Of Initial Predictors       #############
 
 # Variables excluded in second evaluation in order: Age, Hometown_City, Wig_Removed, Death_Drop, Merle, Michelle,
 #                                                   Santino, Gender, Race, Body_Type, Type_Queen, Singing,
@@ -348,14 +352,14 @@ summary(Model_20 <- glm(OUTCOME_LOSS ~ Age + Carson + Dancing + Outfit_Reveal + 
 
 anova(Model_20, Model_19, test="LRT")     # Age retained
 
-############     Testing Linearity of Continuous Variables     ############
+############     Step 4: Testing Linearity of Continuous Variables     ############
 
 
-summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+summary(Model_20 <- glm(OUTCOME_LOSS ~ Age + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
                           Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
 
-Age_Ordered <- Bottom_Two_2 %>%      # age arranged from smallest to largest
+Age_Ordered <- Bottom_Two_2 %>%
     arrange(Age)
 
 Age_Range <- as.factor(cut(Age_Ordered$Age, breaks=c(20,25,30,35,40,41,45,Inf)))
@@ -365,7 +369,7 @@ table(Age_Range)
 Age_Range <- relevel(Age_Range, ref = "(45,Inf]")
 levels(Age_Range)
 
-summary(Model_20 <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age_Range + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+summary(Model_20 <- glm(OUTCOME_LOSS ~ Age_Range + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
                           Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
 
@@ -381,6 +385,19 @@ table(Age_Range)
 Age_Range <- relevel(Age_Range, ref = "(40,Inf]")
 levels(Age_Range)
 
-summary(final_model) <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass:Expressed_Hardship + Age_Range + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
-                       Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2)
+# main effects model
+summary(Model_20 <- glm(OUTCOME_LOSS ~ Age_Range + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                    Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
 
+#########     Step 5: Assessing First Order Interactions        ##########
+
+summary(Model_20 <- glm(OUTCOME_LOSS ~ Age_Range + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                    Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+# no first order interactions were found to significantly impact the model
+
+# preliminary final model
+summary(Model_20 <- glm(OUTCOME_LOSS ~ Age_Range + Carson + Dancing + Outfit_Reveal + Ross + Do_They_Know_Words +
+                    Sewing + Lip_Sync_Ass + Expressed_Hardship, family = binomial(link='logit'), data = Bottom_Two_2))
+
+confint(Model_20)
