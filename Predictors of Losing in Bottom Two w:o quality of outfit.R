@@ -382,7 +382,7 @@ Age_Range <- as.factor(cut(Age_Ordered$Age, breaks=c(20,25,30,35,40,Inf)))
 
 table(Age_Range)
 
-Age_Range <- relevel(Age_Range, ref = "(40,Inf]")
+Age_Range <- relevel(Age_Range, ref = "(25,30]")
 levels(Age_Range)
 
 # main effects model
