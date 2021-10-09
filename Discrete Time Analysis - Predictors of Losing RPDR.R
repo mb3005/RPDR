@@ -229,8 +229,13 @@ anova(Null, Expressed_Hardship, test="LRT")
 
 
 summary(Full_Model <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Outfit_Reveal + Do_They_Know_Words +
-                          Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship +
+                          Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
                           family = binomial(link='logit'), data = RPDR))
 
+summary(Model_1 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Outfit_Reveal + Do_They_Know_Words +
+                         Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+                         family = binomial(link='logit'), data = RPDR))
+
+anova(Model_1, Full_Model, test="LRT")   #Gender excluded from Model 1
 
 
