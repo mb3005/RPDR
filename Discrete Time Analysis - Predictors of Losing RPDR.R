@@ -154,72 +154,72 @@ Bottom_2_Interval$Race
 
 ########   Step 1: Univariate Analysis    #########
 
-summary(Null <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Null <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 
-summary(Age <- glm(OUTCOME_LOSS ~ Age + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Age <- glm(OUTCOME_LOSS ~ Age + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Age, test="LRT")
 
-summary(Hometown_City <- glm(OUTCOME_LOSS ~ Hometown_City + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Hometown_City <- glm(OUTCOME_LOSS ~ Hometown_City + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Hometown_City, test="LRT")
 
-summary(Hometown_State <- glm(OUTCOME_LOSS ~ Hometown_State + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Hometown_State <- glm(OUTCOME_LOSS ~ Hometown_State + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Hometown_State, test="LRT")
 
-summary(Wig_Removed <- glm(OUTCOME_LOSS ~ Wig_Removed + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Wig_Removed <- glm(OUTCOME_LOSS ~ Wig_Removed + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Wig_Removed, test="LRT")
 
-summary(Death_Drop <- glm(OUTCOME_LOSS ~ Death_Drop + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Death_Drop <- glm(OUTCOME_LOSS ~ Death_Drop + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Death_Drop, test="LRT")
 
-summary(Outfit_Reveal <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Outfit_Reveal <- glm(OUTCOME_LOSS ~ Outfit_Reveal + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Outfit_Reveal, test="LRT")
 
-summary(Quality_Of_Outfit <- glm(OUTCOME_LOSS ~ Quality_Of_Outfit + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Quality_Of_Outfit <- glm(OUTCOME_LOSS ~ Quality_Of_Outfit + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Quality_Of_Outfit, test="LRT")
 
-summary(Merle <- glm(OUTCOME_LOSS ~ Merle + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Merle <- glm(OUTCOME_LOSS ~ Merle + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Merle, test="LRT")
 
-summary(Michelle <- glm(OUTCOME_LOSS ~ Michelle + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Michelle <- glm(OUTCOME_LOSS ~ Michelle + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Michelle, test="LRT")
 
-summary(Santino <- glm(OUTCOME_LOSS ~ Santino + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Santino <- glm(OUTCOME_LOSS ~ Santino + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Santino, test="LRT")
 
-summary(Ross <- glm(OUTCOME_LOSS ~ Ross + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Ross <- glm(OUTCOME_LOSS ~ Ross + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Ross, test="LRT")
 
-summary(Carson <- glm(OUTCOME_LOSS ~ Carson + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Carson <- glm(OUTCOME_LOSS ~ Carson + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Carson, test="LRT")
 
-summary(Do_They_Know_Words <- glm(OUTCOME_LOSS ~ Do_They_Know_Words + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Do_They_Know_Words <- glm(OUTCOME_LOSS ~ Do_They_Know_Words + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Do_They_Know_Words, test="LRT")
 
-summary(Gender <- glm(OUTCOME_LOSS ~ Gender + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Gender <- glm(OUTCOME_LOSS ~ Gender + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Gender, test="LRT")
 
-summary(Race <- glm(OUTCOME_LOSS ~ Race + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Race <- glm(OUTCOME_LOSS ~ Race + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Race, test="LRT")
 
-summary(Body_Type <- glm(OUTCOME_LOSS ~ Body_Type + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Body_Type <- glm(OUTCOME_LOSS ~ Body_Type + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Body_Type, test="LRT")
 
-summary(Type_Queen <- glm(OUTCOME_LOSS ~ Type_Queen + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Type_Queen <- glm(OUTCOME_LOSS ~ Type_Queen + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Type_Queen, test="LRT")
 
-summary(Sewing <- glm(OUTCOME_LOSS ~ Sewing + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Sewing <- glm(OUTCOME_LOSS ~ Sewing + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Sewing, test="LRT")
 
-summary(Dancing <- glm(OUTCOME_LOSS ~ Dancing + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Dancing <- glm(OUTCOME_LOSS ~ Dancing + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Dancing, test="LRT")
 
-summary(Singing <- glm(OUTCOME_LOSS ~ Singing + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Singing <- glm(OUTCOME_LOSS ~ Singing + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Singing, test="LRT")
 
-summary(Lip_Sync_Ass <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Lip_Sync_Ass <- glm(OUTCOME_LOSS ~ Lip_Sync_Ass + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Lip_Sync_Ass, test="LRT")
 
-summary(Expressed_Hardship <- glm(OUTCOME_LOSS ~ Expressed_Hardship + Episode + Bottom_Two_Interval, family=binomial(link='logit'), data=Bottom_2_Interval))
+summary(Expressed_Hardship <- glm(OUTCOME_LOSS ~ Expressed_Hardship + Episode + Bottom_Two_Interval, family=binomial(link='cloglog'), data=Bottom_2_Interval))
 anova(Null, Expressed_Hardship, test="LRT")
 
 ######     Step 2:   Multivariate Model Comparisons : Backward Elimination Round 1      #######
@@ -227,29 +227,29 @@ anova(Null, Expressed_Hardship, test="LRT")
 
 summary(Full_Model <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Outfit_Reveal + Do_They_Know_Words +
                           Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
-                          family = binomial(link='logit'), data = Bottom_2_Interval))
+                          family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
 summary(Model_1 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Outfit_Reveal + Do_They_Know_Words +
                          Sewing + Dancing + Lip_Sync_Ass + Expressed_Hardship,
-                         family = binomial(link='logit'), data = Bottom_2_Interval))
+                         family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
 anova(Model_1, Full_Model, test="LRT")   # p value 0.7502 Singing excluded from Model 1
 
 summary(Model_2 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Outfit_Reveal + Do_They_Know_Words +
                        Sewing + Lip_Sync_Ass + Expressed_Hardship,
-                       family = binomial(link='logit'), data = Bottom_2_Interval))
+                       family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
 anova(Model_2, Model_1, test="LRT")   # p value 0.6391 Dancing excluded from Model 2
 
 summary(Model_3 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Do_They_Know_Words +
                        Sewing + Lip_Sync_Ass,
-                       family = binomial(link='logit'), data = Bottom_2_Interval))
+                       family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
 anova(Model_3, Model_2, test="LRT")   # p value 0.1327 Expressed Hardship excluded from Model 3
 
 summary(Model_4 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_Hardship +
                        Sewing + Lip_Sync_Ass,
-                       family = binomial(link='logit'), data = Bottom_2_Interval))
+                       family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
 anova(Model_4, Model_3, test="LRT")   # p value 0.02165 Expressed Hardship retained in Model 4
 
@@ -263,9 +263,9 @@ anova(Model_4, Model_3, test="LRT")   # p value 0.02165 Expressed Hardship retai
 #             Gender, Race, Body_Type, Type_Queen
 # None retained in the model
 
-# summary(Model_5 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_Hardship +
-#                       Sewing + Lip_Sync_Ass,
-#                       family = binomial(link='logit'), data = Bottom_2_Interval))
+# summary(Model_5 <- glm(OUTCOME_LOSS ~ Age + Episode + Bottom_Two_Interval + Expressed_Hardship +
+#                    Sewing + Lip_Sync_Ass,
+#                    family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
 # anova(Model_5, Model_4, test="LRT")
 
@@ -273,7 +273,52 @@ anova(Model_4, Model_3, test="LRT")   # p value 0.02165 Expressed Hardship retai
 
 summary(Model_4 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_Hardship +
                          Sewing + Lip_Sync_Ass,
-                       family = binomial(link='logit'), data = Bottom_2_Interval))
+                       family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
 ############     Step 4: Testing Linearity of Continuous Variables     ############
+
+# No continuous variables (Episode and Bottom Two Interval do not count)
+
+# Main effects model
+summary(Model_4 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_Hardship +
+                       Sewing + Lip_Sync_Ass,
+                       family = binomial(link='cloglog'), data = Bottom_2_Interval))
+
+
+##########     Step 5: Assessing First Order Interactions        ##########
+
+
+#summary(Model_5 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_Hardship +
+                       Sewing + Lip_Sync_Ass,
+                       family = binomial(link='cloglog'), data = Bottom_2_Interval))
+
+#anova(Model_5, Model_4, test="LRT")
+
+# no interactions were significant
+
+# preliminary final model
+
+summary(Model_4 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_Hardship +
+                         Sewing + Lip_Sync_Ass,
+                       family = binomial(link='cloglog'), data = Bottom_2_Interval))
+
+
+confint(Model_4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
