@@ -226,32 +226,26 @@ anova(Null, Expressed_Hardship, test="LRT")
 
 
 summary(Full_Model <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Outfit_Reveal + Do_They_Know_Words +
-                          Sewing + Dancing + Singing + Lip_Sync_Ass + Expressed_Hardship,
+                          Sewing + Dancing + Singing + Expressed_Hardship,
                           family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
-summary(Model_1 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Outfit_Reveal + Do_They_Know_Words +
-                         Sewing + Dancing + Lip_Sync_Ass + Expressed_Hardship,
+summary(Model_1 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Do_They_Know_Words +
+                         Sewing + Dancing + Singing + Expressed_Hardship,
                          family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
-anova(Model_1, Full_Model, test="LRT")   # p value 0.7502 Singing excluded from Model 1
+anova(Model_1, Full_Model, test="LRT")   # p value 0.2321 Outfit Reveal excluded from Model 1
 
-summary(Model_2 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Outfit_Reveal + Do_They_Know_Words +
-                       Sewing + Lip_Sync_Ass + Expressed_Hardship,
+summary(Model_2 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Do_They_Know_Words +
+                       Sewing + Singing + Expressed_Hardship,
                        family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
-anova(Model_2, Model_1, test="LRT")   # p value 0.6391 Dancing excluded from Model 2
+anova(Model_2, Model_1, test="LRT")   # p value 0.2004 Dancing excluded from Model 2
 
 summary(Model_3 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Do_They_Know_Words +
-                       Sewing + Lip_Sync_Ass,
+                       Sewing + Expressed_Hardship,
                        family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
-anova(Model_3, Model_2, test="LRT")   # p value 0.1327 Expressed Hardship excluded from Model 3
-
-summary(Model_4 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_Hardship +
-                       Sewing + Lip_Sync_Ass,
-                       family = binomial(link='cloglog'), data = Bottom_2_Interval))
-
-anova(Model_4, Model_3, test="LRT")   # p value 0.02165 Expressed Hardship retained in Model 4
+anova(Model_3, Model_2, test="LRT")   # p value 0.1103 Singing excluded from Model 3
 
 # All covariates show meeting significance criteria p < 0.05
 # All covariates met criteria of Beta estimates changing no more than 20% compared to Full Model
@@ -263,16 +257,16 @@ anova(Model_4, Model_3, test="LRT")   # p value 0.02165 Expressed Hardship retai
 #             Gender, Race, Body_Type, Type_Queen
 # None retained in the model
 
-# summary(Model_5 <- glm(OUTCOME_LOSS ~ Age + Episode + Bottom_Two_Interval + Expressed_Hardship +
-#                    Sewing + Lip_Sync_Ass,
-#                    family = binomial(link='cloglog'), data = Bottom_2_Interval))
+#summary(Model_4 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Do_They_Know_Words +
+#                      Sewing + Expressed_Hardship,
+#                      family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
-# anova(Model_5, Model_4, test="LRT")
+#anova(Model_4, Model_3, test="LRT")
 
 # preliminary main effects model
 
-summary(Model_4 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_Hardship +
-                         Sewing + Lip_Sync_Ass,
+summary(Model_3 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Do_They_Know_Words +
+                       Sewing + Expressed_Hardship,
                        family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
 ############     Step 4: Testing Linearity of Continuous Variables     ############
@@ -280,30 +274,28 @@ summary(Model_4 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_
 # No continuous variables (Episode and Bottom Two Interval do not count)
 
 # Main effects model
-summary(Model_4 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_Hardship +
-                       Sewing + Lip_Sync_Ass,
+summary(Model_3 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Do_They_Know_Words +
+                       Sewing + Expressed_Hardship,
                        family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
 
 ##########     Step 5: Assessing First Order Interactions        ##########
 
+#summary(Model_4 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Do_They_Know_Words +
+#                       Sewing + Expressed_Hardship + Sewing:Do_They_Know_Words,
+#                       family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
-#summary(Model_5 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_Hardship +
-                       Sewing + Lip_Sync_Ass,
-                       family = binomial(link='cloglog'), data = Bottom_2_Interval))
-
-#anova(Model_5, Model_4, test="LRT")
+#anova(Model_4, Model_3, test="LRT")
 
 # no interactions were significant
 
 # preliminary final model
 
-summary(Model_4 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Expressed_Hardship +
-                         Sewing + Lip_Sync_Ass,
+summary(Model_3 <- glm(OUTCOME_LOSS ~ Episode + Bottom_Two_Interval + Do_They_Know_Words +
+                       Sewing + Expressed_Hardship,
                        family = binomial(link='cloglog'), data = Bottom_2_Interval))
 
-
-confint(Model_4)
+confint(Model_3)
 
 
 
